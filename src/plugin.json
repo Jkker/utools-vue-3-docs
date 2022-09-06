@@ -1,19 +1,20 @@
 {
-  "logo": "./ant-design.png",
+  "logo": "./vue-3.png",
   "features": [
     {
-      "code": "Ant Design",
-      "explain": "查询 Ant Design 文档",
+      "code": "Vue 3",
+      "explain": "查询 Vue 3 文档",
       "cmds": [
-        "Ant Design",
-        "antd"
+        "Vue 3",
+        "vue3",
+        "vue"
       ]
     },
     {
-      "code": "Ant Design Doc Setting",
-      "explain": "设置 Ant Design 文档语言、打开方式等",
+      "code": "Vue 3 Doc Setting",
+      "explain": "设置 Vue 3 文档语言、打开方式等",
       "cmds": [
-        "Ant Design Doc Setting"
+        "Vue 3 Doc Setting"
       ]
     }
   ],

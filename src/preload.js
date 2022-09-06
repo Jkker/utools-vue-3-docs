@@ -1,7 +1,5 @@
 const DEFAULT_CONFIG = {
-  cn: true,
   openExternal: false,
-  mirror: false,
 };
 
 const CONFIG_ID = "config";
@@ -12,13 +10,13 @@ const getConfig = () =>
 const searchParams = new URLSearchParams({
   "x-algolia-agent":
     "Algolia for JavaScript (4.9.2); Browser (lite); docsearch (3.1.0); docsearch-react (3.1.0)",
-  "x-algolia-application-id": "BH4D9OD16A",
-  "x-algolia-api-key": "60ac2c1a7d26ab713757e4a081e133d0",
+  "x-algolia-application-id": "UURH1MHAF7",
+  "x-algolia-api-key": "c23eb8e7895f42daeaf2bf6f63eb4bf6",
 });
-const url = `https://bh4d9od16a-dsn.algolia.net/1/indexes/*/queries?${searchParams.toString()}`;
+const url = `https://uurh1mhaf7-dsn.algolia.net/1/indexes/*/queries?${searchParams.toString()}`;
 const cache = new Map();
 
-const createPostData = (query, lang) => ({
+const createPostData = (query) => ({
   requests: [
     {
       attributesToHighlight: ["hierarchy.lvl0", "hierarchy.lvl1"],
@@ -34,8 +32,9 @@ const createPostData = (query, lang) => ({
         "type",
         "url",
       ],
-      indexName: "ant_design",
-      params: `attributesToRetrieve=%5B%22hierarchy.lvl0%22%2C%22hierarchy.lvl1%22%2C%22hierarchy.lvl2%22%2C%22hierarchy.lvl3%22%2C%22hierarchy.lvl4%22%2C%22hierarchy.lvl5%22%2C%22hierarchy.lvl6%22%2C%22content%22%2C%22type%22%2C%22url%22%5D&attributesToSnippet=%5B%22hierarchy.lvl1%3A10%22%2C%22hierarchy.lvl2%3A10%22%2C%22hierarchy.lvl3%3A10%22%2C%22hierarchy.lvl4%3A10%22%2C%22hierarchy.lvl5%3A10%22%2C%22hierarchy.lvl6%3A10%22%2C%22content%3A10%22%5D&snippetEllipsisText=%E2%80%A6&highlightPreTag=%3Cmark%3E&highlightPostTag=%3C%2Fmark%3E&hitsPerPage=20&facetFilters=%5B%22tags%3A${lang}%22%5D`,
+      indexName: "vuejs_cn2",
+      params:
+        "attributesToRetrieve=%5B%22hierarchy.lvl0%22%2C%22hierarchy.lvl1%22%2C%22hierarchy.lvl2%22%2C%22hierarchy.lvl3%22%2C%22hierarchy.lvl4%22%2C%22hierarchy.lvl5%22%2C%22hierarchy.lvl6%22%2C%22content%22%2C%22type%22%2C%22url%22%5D&attributesToSnippet=%5B%22hierarchy.lvl1%3A10%22%2C%22hierarchy.lvl2%3A10%22%2C%22hierarchy.lvl3%3A10%22%2C%22hierarchy.lvl4%3A10%22%2C%22hierarchy.lvl5%3A10%22%2C%22hierarchy.lvl6%3A10%22%2C%22content%3A10%22%5D&snippetEllipsisText=%E2%80%A6&highlightPreTag=%3Cmark%3E&highlightPostTag=%3C%2Fmark%3E&hitsPerPage=20&facetFilters=%5B%22version%3Av3%22%5D",
       query,
     },
   ],
@@ -63,11 +62,9 @@ const plugin = {
         callbackSetList(cached);
         return;
       }
-      const data = getConfig().data;
-
       fetch(url, {
         method: "POST",
-        body: JSON.stringify(createPostData(query, data.cn ? "cn" : "en")),
+        body: JSON.stringify(createPostData(query)),
       })
         .then(async (response) => {
           const json = await response.json();
@@ -83,9 +80,7 @@ const plugin = {
     select: (action, items) => {
       window.utools.hideMainWindow();
       const data = getConfig().data;
-      const url = data.mirror
-        ? items.url.replace("ant.design", "ant-design.antgroup.com")
-        : items.url;
+      const url = items.url;
 
       if (data.openExternal) {
         utools.shellOpenExternal(url);
@@ -95,7 +90,7 @@ const plugin = {
 
       window.utools.outPlugin();
     },
-    placeholder: "搜索 Ant Design 文档",
+    placeholder: "搜索 Vue 3 文档",
   },
 };
 
@@ -108,30 +103,6 @@ const setting = {
       const config = getConfig();
       const data = config.data;
       callbackSetList([
-        {
-          title: !data.cn ? "切换到中文文档" : "Switch to English Docs",
-          description: !data.cn
-            ? "切换文档语言为中文"
-            : "Switch language to English",
-          icon: "./lang.svg", // 图标(可选)
-          data: {
-            ...data,
-            cn: !data.cn,
-          },
-          _rev: config._rev,
-        },
-        {
-          title: !data.mirror ? "切换到国内镜像" : "Switch to Global Site",
-          description: !data.mirror
-            ? "替换文档域名为 ant-design.antgroup.com"
-            : "Switch to ant.design",
-          icon: "./globe.svg", // 图标(可选)
-          data: {
-            ...data,
-            mirror: !data.mirror,
-          },
-          _rev: config._rev,
-        },
         {
           title: !data.openExternal
             ? "使用系统默认浏览器打开"
@@ -161,6 +132,6 @@ const setting = {
 };
 
 window.exports = {
-  "Ant Design": plugin,
-  "Ant Design Doc Setting": setting,
+  "Vue 3": plugin,
+  "Vue 3 Doc Setting": setting,
 };
