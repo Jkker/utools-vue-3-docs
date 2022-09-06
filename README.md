@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://github.com/Jkker/utools-ant-design-docs">
-    <img src="https://github.com/Jkker/utools-ant-design-docs/raw/master/src/ant-design.png" alt="Logo" width="80" height="80">
+    <img src="https://github.com/Jkker/utools-ant-design-docs/raw/main/src/ant-design.png" alt="Logo" width="80" height="80">
   </a>
   <h3 align="center">uTools Ant Design Documentation</h3>
   <p align="center">
