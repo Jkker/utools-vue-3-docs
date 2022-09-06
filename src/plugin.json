@@ -1,0 +1,21 @@
+{
+  "logo": "./ant-design.png",
+  "features": [
+    {
+      "code": "Ant Design",
+      "explain": "查询 Ant Design 文档",
+      "cmds": [
+        "Ant Design",
+        "antd"
+      ]
+    },
+    {
+      "code": "Ant Design Doc Setting",
+      "explain": "设置 Ant Design 文档语言、打开方式等",
+      "cmds": [
+        "Ant Design Doc Setting"
+      ]
+    }
+  ],
+  "preload": "./preload.js"
+}
